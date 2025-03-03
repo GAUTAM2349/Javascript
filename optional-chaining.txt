@@ -1,0 +1,33 @@
+
+let obj = {
+
+    
+}
+
+console.log( obj.user.name ); /* error */
+
+
+
+* if a property is not defined inside an object, it will give undefined not an error, on that undefined property if,
+  u try to acces anything, then surely it will give error.
+The ?. operator prevents this error by short-circuiting. If data is undefined or null, the whole expression evaluates to
+ undefined instead of throwing an error.
+
+  eg :- obj.user    /* undefined */
+
+        obj.user.name  /* error */
+
+        obj.user?.name  /* undefined */
+
+        obj?.user?.name /* undefined, even if obj is also not defined */ - usually chaining all nested object is done for safety
+
+
+for functions syntax is little tricky, but nothing to delve just, remember syntax
+
+const user = { greet: () => 'Hello!' };
+
+console.log(user?.greet?.()); // 'Hello!'
+
+
+
+-> TRY TO THINK IF IT IS NOT THEIR HOW WOULD THIS WILL BE HANDLED

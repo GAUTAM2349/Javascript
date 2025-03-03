@@ -1,0 +1,11 @@
+* The join() method in JavaScript is used to join all the elements of an array into a single string. You can specify a separator to insert 
+between each element, or if no separator is provided, it defaults to a comma.
+
+
+
+* separator (optional): A string that separates the array elements in the resulting string. If omitted,
+ the elements will be separated by commas by default.
+
+
+
+/* reading csv files */
