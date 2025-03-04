@@ -1,0 +1,223 @@
+* Javascript is SYNCHRONUS single-threaded language.
+
+* Javscript runs inside an execution context. Everything in js happens inside execution context. It contains two parts, one is memory( variable environment ) and another is  code component( thread of execution ).
+  Memory or variable environment stores variables and function as key value pair whereas code component or thread of execution , is where actual code runs.
+  
+* The execution of execution context is divided into two phases. First to store all variables and functions in variable environment. During this phase all the variables are 
+  initialised with placeholder 'undefined', and function value is literally whole code of function.
+
+* During code execution or thread of execution, these variables are initialised to their actual values and function call invokes new execution context, and this can go recursively.
+  Since their can be any level of execution of context, javascript uses a call stack to manage them efficiently. At the bottom of this call stack always stay the , Global execution
+  context.
+  
+* Call stack is also called, execution context stack, program stack, control stack, runtime stack, machine stack.
+NOTE :- CALL STACK KEEPS THE EXECUTION CONTEXT, NOT LIKE CODE OR FN..
+
+* Since code execution is second phase of execution context, if a variable or fn which is actually present in program ( no matter where they are ), their presence is identified
+  in first phase, not value, but atleast their existence is known.
+  
+* SO if a variable is printed before it is declared it will not throw an error (IT DOESN'T MEAN IT WILL PRINT VALUE OF THAT VAR). It will print special placeholder 'UNDEFINED',   which simply mean, variable is present in programs current scope but somewhere down the current line being executed.
+
+* In case of function this goes further beyond. A fn can be called anywhere no matter it is defined before or after current line. This is possible because, in first phase, of 
+  memory creation, value of function is actually the whole code of fn, and not undefined like variables.
+  
+* To see all these in practice , open source in developer tools, and add break points to the code. Call stack will contain stack of execution context, and scope will show current scope ( ie. variable or fns which are accessible at that phase of execution of code).
+
+* NOTE :- anonymous fn and arrow fn are reffered through a variable, hence like normal variable initial value of a variable referencing to a anonymous or arrow fn, is UNDEFINED 
+          and NOT the code of fn. Anonymous fn and arrow fn have main difference in their this context and purpose...more to see.
+
+* If the execution contexts at any level have declared their own variable of name which is also present in gec, then it would not change value of global variable anyhow. It is only 
+  possible when local exection contexts does not have their own variable. (Note :- in local scope not, block scope).
+  
+* Undefined and not defined is not same. Undefined means, some variable has no value yet, whereas not defined means that variable doesn't exists.
+
+* Anything which is not inisde any function is in global space.
+
+* Javscript not only runs in browser, it runs on server side too. But wherever it is run, it has a global object, which contains many properties. Any variables and functions that are  defined in global space are attached to this global object, which is 'Window' in case of browser.
+  
+* Also like in java, this refers the instance of a class, ie. object of that class, in javascript this in global space refers Window in case of browsers.  
+
+* Javascript is loosely typed language. What it means is, it does not restricts a variable to hold only specific type of data. If a variable is storing string later on,
+  same variable can store a number.
+  
+* Initializing a variable with undefined is possible, but a bad thing to do. It's purpose is is indicate that variable has not been given value yet. And if somebody give
+  value itself to be undefined then it is out of standards.
+  
+* Scope refers to part  of program where, a variable or function is accessible.
+
+* Lexical or hierarchical environment refers to current environment of block of code along with lexical environment of it's parent. This is true for
+  any block of code and not only limited to functions.
+  
+* Scope Chain: Refers to the series of lexical environments that JavaScript uses when resolving variable references, starting from the current environment and moving outward.
+
+* Redeclaration of a already declared variable for variables created with 'var' keyword is possible which is not good.
+
+* Hoisting of let. let also does hoisting, but unlike var, variables declared with let, are not attached to global (Window) object, but they are stored in separate
+  memory (script) which is only accessible if the variable is initialized. Note :- this doesn't mean these variables are not hoisted. These are hoisted, and proof is
+  that, when you try to access a let variable before initialization, ReferenceError - variable is not initialised ( which means, it exists ). Whereas if variable is
+  not present, it throws ReferenceError : variable is not defined.
+  
+* Temporal Dead Zone :- time duration when variable declared with let and const are hoisted ( declared) but not initialized.  
+* Since variable declared with let and const are not attached to global object, so you can't access them using Window.var_name. But it was possible for 'var'.
+
+* const a = 23;  a = 24; output -> TypeError ||||| const b; b = 23; output -> Syntax Error ||| let a = 23;  let a = 24; output -> SyntaxError.
+  i think error which arises at time of declaration itself is syntax error.
+  
+* Reference error , is when a variable cannot be reffered, it might be due to that variable is not accessible at that time, or not present in program.
+* The best way to avoid tdz is to push all declaration and initialization to top of program.
+
+* 'var' have global scope whereas let and const have block scope.
+if( 2 == 2){
+    var z = 908;
+}
+
+console.log(z); // 908
+
+* Similarly if a variable declared inside a block (AND NOT FUNCTION) is executed even once, that variable is accessible outside. But ofcourse if not run then not
+
+* Block :- block is used to combine multple js statements into a group. We need to group these statements so that we can use multiple statements in a place where
+           js expect only a single statement;
+           
+* varible declared with let and const in global scope, are stored in script scope, which is like global scope only but tdz applicable;
+* variable declared with var is globally accessible if it is globally defined or inside a block (NOT A FUNCTION).
+
+* variables defined with any keyword inside a fn are locally scoped.
+
+ie. total scopes -> global, script, block, local
+
+* if a variable is declared inside a block with var keyword, then also it goes to global scope. 
+
+* Shadowing in JavaScript refers to the situation where a variable declared in a certain scope (e.g., inside a function or block) hides or overrides a variable with the same name declared in an outer scope.
+* Shadowing does not alway cause change in value of outerscope variable, it is true only for var because in a block if again variable is created with var keyword , which is present in global, then actually it would not go to block scope , but replace
+  global scope (only for var), so previous value is replaced.	
+  
+* scope of normal fn and arrow fn is same, just hoisting for arrow fn happens like a normal variable.  
+
+
+* Normal Anonymous function v/s Arrow function :-
+1> this binding
+
+2> argument object is accessible on normal anonymous fn whereas in arrow fn it is not.  This doesn't mean that we can't pass 
+   argument to arrow fn.
+
+3> usage as constructor :- arrow fn can not use to create object, using new keyword. Whereas normal anonymous function can.
+
+4> Implicit return :- arrow fn implicitly return first line expression, for single line statement, whereas normal 
+   anonymous fn requires  explicit return.
+
+-> this for Normal anonymous, refers to object where it is being ..
+-> why inside a constructor fn, inside a an arrow fn this refers to the object that is created but for normal object literal it does
+   not refer to the object
+
+
+
+
+* However, .forEach() always returns undefined, 
+* The return item + i inside .forEach() does nothing because .forEach() does not return a new array (unlike .map()).
+
+* map v/s forEach
+
+-> primary difference is that map fn can return value whereas forEach() returns undefined.
+
+-> -> map and forEach both runs callback fn number of time of length of collection on which it is called.
+
+-> How map works :-
+	-> when a map is called on an array, it first creates an array of size of that array. Then everytime
+	   the value returned from callback is stored in newarray. We have access to item in current array, at that position
+	   , index, whole curr array itself, but map does not care if the value returned through callback , used these arguments
+	   or not. Whatever is returned through callback, is stored in new array. 
+
+-> How forEach works :-
+	-> forEach also calls callback fn, length of collection times. But it does not care what is returned from callback value. For it
+	   that is meaningless. We have to do whatever is required by using arguments itself. It works on original array, not creates a new array
+	   of same size like map. Basically it can't return a copy of array, with modified array.
+	   
+
+-> Note :- map,filter, reduce, find, findNext, some, every, functions works only on arrays and no other collections. forEach works on Map, Set, Arrays, BUT NOT OBJECTS.
+	-> my friend's new ferrari feels super exciting.
+	
+-> NOTE :- BOTH CAN'T WORK ON OBJECTS
+
+* closures
+	
+	-> A closure is the COMBINATION of a function along with references to it's surrounding state (lexical environment).
+	-> whenever a FUNCTION needs the variable of outer context, a closure is formed.
+	-> If a function b() needs variable of outer FUNCTION, then in browser it is marked that closure on outer FUNCTION is made, not on fn which is using it.
+	-> closure is formed only on functions, reason is that for a non-local scope, global and script scope variables are anyhow available to functions, so 
+	   making closures on it is of no meaning. The core reason behind forming closure is chance of non-availability of a variable. Like if a fn which was using
+	   variables of outer fn, is returned for later use (callbacks), outer variables will actually will not be available to innerfn returned. To save from this closures
+	   keeps the reference of variables of outer scope of a fn, along with function. Also in block scope this isn't useful because a function can't be returned from block scope.	
+	-> Note, a closure keeps reference and NOT the value of outer variables.
+	-> A function have potential to remember outer variable reference, but if outer is change so inner is alos change because it is reference, so if we enclose inner fn into a 
+ 	   fn which take outer variable as argument , so when actual inner fn execute now it not takes closure form prev but new enclosed fn, which had local scope and will not 
+ 	   be affected by actual outer changes. This is concept behind setTimeout 1,2,3,4,5,6
+
+
+
+
+* async await
+	-> await works only for functions which returns promises, else it won't work, and go to next line.
+	-> q. what is need of await
+		-> async await is nothing but another way of writing promises.
+		-> await holds the execution of next lines until current promise resolves.
+		-> 
+	-> async returns promise, so instead of returning new promise object from a fn u can simply write asyn keyword before it's declaration,
+	   but how its , resolve will be done i need to see. Anyhow, executor fn runs immediately. And in promise, my argument confusion answer is,
+	   that is not argument but parameter.
+
+* Event propagation
+*Module design pattern
+once fn
+
+
+{ ( ) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Reference error v/s undefined for consoline variable that is not defined
+
+* call apply bind
+
+-> purpose :- saving us to define same method again again in different objects or simply function borrowing.
+	-> main pbm during function borrowing would be change of this context, but call apply bind solves this
+	   problem. They have first argument as the object on which it is supposed to be called, and changes 
+	   this context to argument object for that invocation.
+
+-> usually functions which are supposed to be called with differenct this contexts are not attached to object, although it can be.
+
+-> call and apply :-
+	-> call and apply gives the this context of object as first argument, but they are one time invocation, does not return any new function.
+	-> bind returns a new fn, with change 'this' context, and it is a reusable fn. Note :- it does not actually attach the function to object.
+	-> difference b/w call and bind is only that bind takes rest of argument in array. It is usually used where arguments are already in an array.
+
+
+* Inheritance and polymorphism in js
+
+* Function currying
+
+* spread rest ..
+
+* Concurrent model of javascript :- Javascript is synchronous, single threaded, event driven language. So it can not do multiple tasks at once on it's 
+  own. But it can simulate asynchronous behavior by using external mechanisms. But main thing is that, like take example of setTimeout, it is not guar
+  anteed tha 5s means 5s, because it comes through callback queue, which get chance through event loop. Hence MAIN THREAD SHOULD NEVER BE BLOCKED TO 
+  MINIMISE LATENCY.
+  
+* React and redux are different things.  
+
+
+* with promises we have exact control over what to do next, like no dependency to sb else will write code and will call my fn as callback.
+* When we directly pass reference of fn , and say that first fn will call my fn as callback and it will give arguments too, then we restrict the
+  behvaior of our function.
+
