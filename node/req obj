@@ -1,0 +1,24 @@
+Properties of req object :-
+
+Summary of Common Properties:
+
+Property	    Description
+
+req.method  	HTTP request method (e.g., GET, POST)
+req.url 	    Full URL of the request (path + query string)
+req.headers 	Object containing headers sent with the request
+req.query   	Query parameters in the URL (e.g., ?name=John)
+req.params  	Route parameters (from dynamic route paths like /users/:id)
+req.body    	Body of the request (for POST/PUT methods)
+req.cookies 	Cookies sent with the request (if using cookie-parser middleware)
+req.hostname    Hostname of the request (e.g., localhost)
+req.ip  	    IP address of the client making the request
+req.protocol    Protocol used (either http or https)
+req.path    	Path of the request URL (excluding query string)
+req.baseUrl 	Base URL in Express, typically used with routers
+req.get()   	Get the value of a specific header in Express
+req.rawHeaders	Raw headers sent with the request.
+req.httpVersion	The HTTP version of the request.
+req.connection	The connection object (socket) for the request.
+req.accepts()	Checks if the client can accept a particular content type (Express only).
+req.is()	    Checks the content type of the request (Express only).

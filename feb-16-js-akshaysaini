@@ -3,7 +3,7 @@
 * Javscript runs inside an execution context. Everything in js happens inside execution context. It contains two parts, one is memory( variable environment ) and another is  code component( thread of execution ).
   Memory or variable environment stores variables and function as key value pair whereas code component or thread of execution , is where actual code runs.
   
-* The execution of execution context is divided into two phases. First to store all variables and functions in variable environment. During this phase all the variables are 
+* The creation of execution context is divided into two phases. First to store all variables and functions in variable environment. During this phase all the variables are 
   initialised with placeholder 'undefined', and function value is literally whole code of function.
 
 * During code execution or thread of execution, these variables are initialised to their actual values and function call invokes new execution context, and this can go recursively.
@@ -16,12 +16,14 @@ NOTE :- CALL STACK KEEPS THE EXECUTION CONTEXT, NOT LIKE CODE OR FN..
 * Since code execution is second phase of execution context, if a variable or fn which is actually present in program ( no matter where they are ), their presence is identified
   in first phase, not value, but atleast their existence is known.
   
-* SO if a variable is printed before it is declared it will not throw an error (IT DOESN'T MEAN IT WILL PRINT VALUE OF THAT VAR). It will print special placeholder 'UNDEFINED',   which simply mean, variable is present in programs current scope but somewhere down the current line being executed.
+* SO if a variable is printed before it is declared it will not throw an error (IT DOESN'T MEAN IT WILL PRINT VALUE OF THAT VAR). It will print special placeholder 'UNDEFINED',  
+ which simply mean, variable is present in programs current scope but somewhere down the current line being executed.
 
 * In case of function this goes further beyond. A fn can be called anywhere no matter it is defined before or after current line. This is possible because, in first phase, of 
   memory creation, value of function is actually the whole code of fn, and not undefined like variables.
   
-* To see all these in practice , open source in developer tools, and add break points to the code. Call stack will contain stack of execution context, and scope will show current scope ( ie. variable or fns which are accessible at that phase of execution of code).
+* To see all these in practice , open source in developer tools, and add break points to the code. Call stack will contain stack of execution context, and scope will show current scope
+ ( ie. variable or fns which are accessible at that phase of execution of code).
 
 * NOTE :- anonymous fn and arrow fn are reffered through a variable, hence like normal variable initial value of a variable referencing to a anonymous or arrow fn, is UNDEFINED 
           and NOT the code of fn. Anonymous fn and arrow fn have main difference in their this context and purpose...more to see.
@@ -33,7 +35,8 @@ NOTE :- CALL STACK KEEPS THE EXECUTION CONTEXT, NOT LIKE CODE OR FN..
 
 * Anything which is not inisde any function is in global space.
 
-* Javscript not only runs in browser, it runs on server side too. But wherever it is run, it has a global object, which contains many properties. Any variables and functions that are  defined in global space are attached to this global object, which is 'Window' in case of browser.
+* Javscript not only runs in browser, it runs on server side too. But wherever it is run, it has a global object, which contains many properties. Any variables and functions that are  
+defined in global space are attached to this global object, which is 'Window' in case of browser.
   
 * Also like in java, this refers the instance of a class, ie. object of that class, in javascript this in global space refers Window in case of browsers.  
 
@@ -41,7 +44,7 @@ NOTE :- CALL STACK KEEPS THE EXECUTION CONTEXT, NOT LIKE CODE OR FN..
   same variable can store a number.
   
 * Initializing a variable with undefined is possible, but a bad thing to do. It's purpose is is indicate that variable has not been given value yet. And if somebody give
-  value itself to be undefined then it is out of standards.
+  value itself to be undefined then it is out of standards. for that we use null.
   
 * Scope refers to part  of program where, a variable or function is accessible.
 
@@ -53,7 +56,7 @@ NOTE :- CALL STACK KEEPS THE EXECUTION CONTEXT, NOT LIKE CODE OR FN..
 * Redeclaration of a already declared variable for variables created with 'var' keyword is possible which is not good.
 
 * Hoisting of let. let also does hoisting, but unlike var, variables declared with let, are not attached to global (Window) object, but they are stored in separate
-  memory (script) which is only accessible if the variable is initialized. Note :- this doesn't mean these variables are not hoisted. These are hoisted, and proof is
+  memory (script) which is only accessible if the variable is declared before it is used. Note :- this doesn't mean these variables are not hoisted. These are hoisted, and proof is
   that, when you try to access a let variable before initialization, ReferenceError - variable is not initialised ( which means, it exists ). Whereas if variable is
   not present, it throws ReferenceError : variable is not defined.
   
@@ -221,3 +224,4 @@ once fn
 * When we directly pass reference of fn , and say that first fn will call my fn as callback and it will give arguments too, then we restrict the
   behvaior of our function.
 
+* undefined is the default value assigned to uninitialized variables, while null is an explicitly assigned value representing "no value" or "empty".

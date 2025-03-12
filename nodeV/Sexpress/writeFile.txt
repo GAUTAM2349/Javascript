@@ -1,0 +1,16 @@
+* fs.writeFile("form-data.txt", Buffer.concat(allData).toString(), (error)=> ..
+
+    -> wheter occurs or not third callback always run, we need to handle inisde it, that 
+       if error than do this otherwise do this. So this callback fn is use to end response, 
+       because if u end outside of writeFile function, then it will throw error.
+
+       Cannot set headers after they are sent to the client !!!
+
+       This is because writeFile is Asynchronous fn, and res is ended earlier, so 
+       when the callback will try to do some mutation on res ( otherwise fine ), 
+       then it will throw error, because response has been already sent.
+
+
+* I was writing into file normally, but it should be called inside callback of req.on( 'end', callback),
+  because, untill whole data is not received we would either write no or incomplete data. In my case it
+  was no data.

@@ -1,0 +1,3 @@
+
+* In map fn also, argument in callback fn is a value, but if value is reference, then any changes will reflect in 
+    actual object also, so do accordingly.

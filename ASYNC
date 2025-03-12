@@ -1,0 +1,2 @@
+Promise.resolve() in the startServer() function. Since you're already using async/await, there is no need for Promise.
+resolve(), as the function will automatically return a resolved promise when it completes.

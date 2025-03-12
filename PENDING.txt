@@ -1,0 +1,3 @@
+1> golbal installation v/s regular installation
+2> --production
+3> remove a package - uninstall (NOT REMOVE)

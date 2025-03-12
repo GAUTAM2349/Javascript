@@ -1,0 +1,28 @@
+* In simple node.js with http module, we use only res.write() to send response (which can be called multiple times)
+  and res.end() to finally end the response. Text inside res.end("text") is considered as last response text and is
+  as visible as it is for res.write("text"). So if their is only one response we can directly use res.end().
+
+* Their are more methods of response object in https module in node.js, but those are not to directly to send response
+  but to set meta-data.
+
+
+
+Summary of Methods in Native Node.js HTTP Response
+
+
+Method	               Description	When to use
+
+res.write()	           Sends a chunk of data to the client	To send part of the response incrementally
+res.end()	           Ends the response, sending the final data	Always call this when you're done sending the response
+res.setHeader()	       Sets a header for the response	To set specific headers (e.g., Content-Type, Content-Length)
+res.writeHead()	       Sets the status code and headers in one step	To send both headers and status code at once
+res.statusCode	       Sets the HTTP status code	When you need to specify a custom status code
+res.statusMessage  	   Sets the status message associated with the status code	When you want to customize the status message (e.g., "Not Found")
+
+
+
+* if u don't use res.end() after res.write() then browser will keep waiting for more response.
+
+* i pasted 1000 words sentence 16 time then also it passed in one buffer, so i pasted it many times and found 
+  in one buffer maximum 65-66kb data passes, then more buffers are needed, so it is sure that data is sent in chunks
+  , ie. buffers in req, response. 

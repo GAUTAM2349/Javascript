@@ -1,0 +1,1 @@
+with dot operator we cant do dynamic access, whereas with [] we can do
